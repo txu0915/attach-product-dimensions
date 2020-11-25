@@ -1,0 +1,425 @@
+style,style_freq
+Modern,2233
+Glam,2208
+Classic,1223
+Industrial,1163
+"Classic,Transitional",1134
+"Modern,Transitional",1104
+Rustic,897
+"Classic,Mediterranean",625
+"Classic,Mediterranean,Rustic,Southwestern",508
+"Classic,Modern,Transitional",346
+"Mediterranean,Rustic",320
+"Glam,Modern",313
+Cottage,276
+"Cottage,Transitional",273
+"Classic,Glam",249
+"Industrial,Rustic",237
+Mid-Century Modern,223
+"Cottage,Modern,Transitional",218
+"Industrial,Modern",214
+"Minimalist,Modern",195
+"Classic,Cottage",158
+Coastal,156
+"Mediterranean,Rustic,Southwestern",147
+"Cottage,Glam",143
+"Art Deco,Glam",137
+Farmhouse,117
+"Mid-Century Modern,Modern",105
+"Farmhouse,Industrial",101
+"Mediterranean,Transitional",99
+"Mediterranean,Southwestern",91
+"Classic,Cottage,Transitional",91
+"Classic,Mediterranean,Rustic",89
+"Farmhouse,Rustic",87
+Bohemian,76
+"Rustic,Transitional",76
+"Glam,Mediterranean",68
+"Glam,Transitional",67
+Southwestern,64
+"Farmhouse,Industrial,Rustic",64
+"Industrial,Mid-Century Modern",59
+"Classic,Modern",57
+"Coastal,Transitional",55
+"Mission,Rustic",55
+"Mid-Century Modern,Minimalist,Modern",52
+"Classic,Rustic",47
+Mission,46
+"Mediterranean,Rustic,Transitional",44
+"Rustic,Southwestern",43
+"Classic,Rustic,Southwestern",42
+"Mid-Century Modern,Minimalist",40
+"Mid-Century Modern,Transitional",39
+"Farmhouse,Industrial,Modern",39
+"Farmhouse,Mediterranean,Rustic",38
+"Industrial,Mediterranean,Rustic",38
+"Classic,Cottage,Modern,Transitional",38
+"Farmhouse,Transitional",35
+"Farmhouse,Rustic,Southwestern",32
+"Industrial,Transitional",32
+"Coastal,Mid-Century Modern",32
+"Bohemian,Glam",31
+"Farmhouse,Mediterranean",28
+"Cottage,Farmhouse",28
+"Mediterranean,Modern",28
+"Industrial,Mediterranean",27
+"Classic,Southwestern",26
+"Mission,Rustic,Southwestern",25
+"Modern,Rustic",25
+"Coastal,Rustic",24
+"Classic,Cottage,Rustic,Southwestern",23
+"Coastal,Industrial",23
+"Classic,Farmhouse",23
+"Classic,Cottage,Glam",23
+"Coastal,Modern",22
+"Industrial,Rustic,Southwestern",21
+"Cottage,Mediterranean",20
+"Art Deco,Mid-Century Modern",20
+"Coastal,Modern,Transitional",20
+"Classic,Rustic,Transitional",20
+"Glam,Modern,Transitional",20
+"Bohemian,Modern",20
+"Classic,Cottage,Southwestern",19
+"Industrial,Minimalist,Modern",19
+"Coastal,Cottage",18
+Transitional,18
+"Coastal,Farmhouse",18
+Contemporary,18
+"Classic,Mediterranean,Transitional",17
+"Classic,Farmhouse,Mediterranean,Rustic",17
+Art Deco,17
+"Contemporary,Glam,Minimalist,Modern,Transitional",16
+"Classic,Farmhouse,Industrial",16
+"Art Deco,Glam,Modern",16
+"Cottage,Rustic",16
+"Classic,Mission,Rustic,Southwestern",15
+"Industrial,Mid-Century Modern,Rustic",15
+"Coastal,Mid-Century Modern,Minimalist",15
+"Bohemian,Classic",14
+"Classic,Cottage,Farmhouse",14
+"Farmhouse,Mediterranean,Rustic,Southwestern",13
+"Industrial,Modern,Rustic",13
+"Farmhouse,Modern,Transitional",13
+"Industrial,Minimalist",13
+"Industrial,Mid-Century Modern,Modern",12
+"Industrial,Rustic,Transitional",12
+"Bohemian,Contemporary,Cottage,Farmhouse,Glam,Industrial,Modern,Rustic,Traditional,Transitional",12
+"Classic,Industrial,Modern",12
+"Classic,Glam,Transitional",12
+"Bohemian,Coastal",11
+"Classic,Mediterranean,Southwestern",11
+"Classic,Cottage,Glam,Mediterranean",11
+"Farmhouse,Modern",11
+"Mid-Century Modern,Modern,Transitional",11
+"Cottage,Mediterranean,Rustic",11
+"Classic,Industrial",10
+"Cottage,Glam,Transitional",10
+"Classic,Glam,Mediterranean",10
+"Classic,Cottage,Mediterranean",10
+"Modern,Rustic,Southwestern",10
+"Classic,Glam,Traditional,Transitional",10
+"Bohemian,Rustic",9
+"Minimalist,Modern,Transitional",9
+"Industrial,Mid-Century Modern,Minimalist,Modern",9
+"Coastal,Farmhouse,Rustic",9
+"Industrial,Mediterranean,Rustic,Southwestern",9
+"Classic,Minimalist,Transitional",8
+"Mediterranean,Mission,Rustic",8
+"Glam,Industrial",8
+"Classic,Cottage,Rustic",8
+Traditional,8
+"Bohemian,Mediterranean",8
+"Farmhouse,Industrial,Rustic,Southwestern",8
+"Bohemian,Industrial",8
+"Mission,Transitional",8
+"Classic,Mediterranean,Rustic,Transitional",8
+"Coastal,Cottage,Farmhouse",7
+"Coastal,Glam",7
+"Coastal,Farmhouse,Industrial,Rustic",7
+"Coastal,Farmhouse,Industrial",7
+"Art Deco,Glam,Mediterranean",7
+"Art Deco,Classic,Glam",7
+"Classic,Mediterranean,Modern",7
+"Mid-Century Modern,Rustic",7
+"Classic,Cottage,Farmhouse,Industrial",7
+"Glam,Minimalist,Modern",7
+"Classic,Mediterranean,Mission,Rustic,Southwestern",6
+"Bohemian,Farmhouse,Mediterranean,Rustic",6
+"Classic,Farmhouse,Transitional",6
+"Industrial,Modern,Transitional",6
+"Cottage,Farmhouse,Transitional",6
+"Classic,Cottage,Glam,Transitional",6
+"Farmhouse,Industrial,Mediterranean,Rustic",6
+"Classic,Mission,Rustic",6
+"Farmhouse,Rustic,Transitional",6
+"Cottage,Farmhouse,Industrial,Rustic",6
+"Classic,Farmhouse,Rustic,Southwestern",6
+"Art Deco,Classic",5
+"Classic,Mission",5
+"Cottage,Modern",5
+"Classic,Cottage,Farmhouse,Rustic,Southwestern",5
+"Cottage,Farmhouse,Mediterranean",5
+"Classic,Farmhouse,Industrial,Modern",5
+"Contemporary,Traditional",5
+"Farmhouse,Industrial,Modern,Rustic",5
+"Classic,Modern,Rustic,Southwestern",5
+"Industrial,Mid-Century Modern,Minimalist",5
+"Bohemian,Glam,Transitional",4
+"Art Deco,Modern",4
+"Industrial,Mission",4
+"Classic,Modern,Southwestern",4
+"Coastal,Industrial,Rustic",4
+"Farmhouse,Glam",4
+"Bohemian,Classic,Glam",4
+"Mediterranean,Mission,Rustic,Southwestern",4
+"Classic,Mission,Modern",4
+"Classic,Glam,Modern,Traditional,Transitional",4
+"Farmhouse,Modern,Rustic",4
+"Modern,Southwestern",4
+"Farmhouse,Southwestern",4
+"Classic,Industrial,Rustic",4
+"Bohemian,Mediterranean,Rustic,Southwestern",4
+Mediterranean,3
+"Classic,Glam,Modern,Transitional",3
+"Bohemian,Coastal,Cottage,Farmhouse",3
+"Classic,Farmhouse,Industrial,Rustic",3
+"Bohemian,Casual,Classic,Cottage,Farmhouse,Modern,Rustic,Transitional",3
+"Coastal,Cottage,Transitional",3
+Designer,3
+"Glam,Mid-Century Modern",3
+"Farmhouse,Mediterranean,Transitional",3
+"Mid-Century Modern,Mission",3
+"Art Deco,Bohemian,Glam",3
+"Farmhouse,Modern,Rustic,Southwestern",3
+"Coastal,Mediterranean",3
+"Glam,Rustic",3
+"Bohemian,Glam,Mediterranean",3
+"Bohemian,Coastal,Rustic",3
+"Farmhouse,Mid-Century Modern",3
+"Classic,Cottage,Farmhouse,Southwestern",3
+"Classic,Farmhouse,Modern,Transitional",3
+"Coastal,Industrial,Rustic,Southwestern",3
+"Art Deco,Bohemian,Cottage,Glam",3
+"Art Deco,Industrial,Mid-Century Modern,Rustic",3
+"Bohemian,Contemporary,Farmhouse,Glam,Modern,Transitional",3
+"Coastal,Minimalist",3
+"Mid-Century Modern,Modern,Rustic",3
+"Bohemian,Cottage,Farmhouse,Industrial,Rustic,Traditional,Transitional",3
+"Classic,Mission,Modern,Southwestern",3
+"Cottage,Farmhouse,Industrial",3
+"Classic,Glam,Modern",3
+"Mission,Modern",3
+"Bohemian,Glam,Modern",3
+"Classic,Mission,Southwestern",3
+"Bohemian,Classic,Cottage,Glam",2
+"Contemporary,Glam,Modern",2
+"Industrial,Mid-Century Modern,Minimalist,Rustic",2
+"Art Deco,Glam,Industrial,Modern",2
+"Bohemian,Industrial,Modern",2
+"Glam,Mid-Century Modern,Minimalist,Modern",2
+"Art Deco,Classic,Farmhouse",2
+"Minimalist,Transitional",2
+"Art Deco,Bohemian,Glam,Modern",2
+"Coastal,Mid-Century Modern,Transitional",2
+"Cottage,Farmhouse,Rustic",2
+"Classic,Modern,Rustic",2
+"Modern,Rustic,Transitional",2
+"Classic,Farmhouse,Glam,Industrial,Rustic,Traditional,Transitional",2
+"Classic,Farmhouse,Mediterranean",2
+"Industrial,Modern,Southwestern",2
+"Classic,Industrial,Mission,Modern,Southwestern",2
+"Classic,Cottage,Mission,Rustic,Southwestern",2
+"Classic,Contemporary,Glam,Traditional,Transitional",2
+"Farmhouse,Industrial,Mediterranean",2
+"Art Deco,Bohemian,Classic,Glam,Modern",2
+"Classic,Mid-Century Modern",2
+"Glam,Mediterranean,Transitional",2
+"Bohemian,Cottage",2
+"Coastal,Glam,Modern",2
+"Mission,Southwestern",2
+"Classic,Cottage,Modern",2
+"Coastal,Cottage,Glam",2
+"Glam,Mediterranean,Rustic",2
+"Farmhouse,Industrial,Mid-Century Modern,Modern",2
+"Classic,Cottage,Farmhouse,Rustic",2
+"Art Deco,Bohemian,Classic,Glam",2
+"Cottage,Industrial",2
+"Coastal,Farmhouse,Rustic,Southwestern",2
+"Classic,Farmhouse,Industrial,Mission,Modern,Southwestern",2
+"Coastal,Cottage,Modern,Transitional",2
+"Classic,Farmhouse,Southwestern",2
+"Coastal,Farmhouse,Modern",2
+"Industrial,Mediterranean,Rustic,Transitional",2
+"Coastal,Farmhouse,Transitional",2
+"Farmhouse,Industrial,Rustic,Transitional",2
+"Traditional,Transitional",2
+"Classic,Farmhouse,Rustic",2
+"Glam,Industrial,Rustic",2
+"Art Deco,Mid-Century Modern,Minimalist",2
+"Bohemian,Coastal,Industrial",2
+"Glam,Industrial,Mediterranean",2
+"Mediterranean,Modern,Transitional",2
+"Cottage,Farmhouse,Modern",2
+"Coastal,Industrial,Modern",2
+"Classic,Contemporary,Cottage,Glam,Modern,Traditional,Transitional",2
+"Coastal,Cottage,Rustic",2
+"Bohemian,Minimalist,Modern",2
+"Cottage,Industrial,Rustic",2
+"Classic,Industrial,Mission,Modern",1
+"Farmhouse,Industrial,Southwestern",1
+"Classic,Farmhouse,Industrial,Mission,Modern,Rustic,Southwestern",1
+"Mediterranean,Modern,Rustic",1
+"Art Deco,Glam,Transitional",1
+"Rustic,Southwestern,Transitional",1
+"Farmhouse,Mission,Modern,Southwestern",1
+"Coastal,Farmhouse,Mediterranean",1
+"Classic,Mid-Century Modern,Transitional",1
+"Classic,Coastal,Farmhouse,Modern",1
+"Coastal,Modern,Rustic,Transitional",1
+"Basics,Bohemian,Casual,Industrial,Mid-Century Modern,Minimalist,Modern,Transitional",1
+"Cottage,Industrial,Mid-Century Modern,Minimalist,Rustic",1
+"Coastal,Farmhouse,Mid-Century Modern,Minimalist",1
+"Contemporary,Glam,Transitional",1
+"Classic,Coastal,Cottage",1
+"Industrial,Southwestern",1
+"Bohemian,Classic,Mediterranean",1
+"Classic,Cottage,Industrial",1
+"Coastal,Minimalist,Modern",1
+"Cottage,Modern,Southwestern",1
+"Classic,Cottage,Farmhouse,Industrial,Modern",1
+"Art Deco,Classic,Designer,Glam,Modern,Transitional",1
+"Farmhouse,Mid-Century Modern,Minimalist,Modern",1
+"Industrial,Mission,Modern",1
+"Glam,Modern,Rustic",1
+"Glam,Mid-Century Modern,Modern",1
+"Bohemian,Farmhouse,Mediterranean,Rustic,Southwestern",1
+"Industrial,Mediterranean,Modern,Rustic,Transitional",1
+"Classic,Industrial,Mission,Modern,Transitional",1
+"Art Deco,Bohemian,Contemporary,Designer,Glam,Mid-Century Modern,Modern,Transitional",1
+"Farmhouse,Mission",1
+"Mediterranean,Modern,Rustic,Transitional",1
+"Classic,Glam,Rustic",1
+"Mediterranean,Mid-Century Modern,Transitional",1
+"Contemporary,Industrial",1
+"Coastal,Industrial,Minimalist",1
+"Basics,Classic,Coastal,Designer,Farmhouse,Mediterranean,Minimalist,Rustic,Traditional,Transitional",1
+"Coastal,Glam,Mid-Century Modern",1
+"Bohemian,Coastal,Farmhouse",1
+"Mediterranean,Mission",1
+"Bohemian,Farmhouse",1
+"Coastal,Mediterranean,Rustic,Transitional",1
+"Casual,Classic,Mediterranean,Minimalist,Modern",1
+"Farmhouse,Industrial,Mission",1
+"Classic,Mission,Rustic,Traditional,Transitional",1
+"Cottage,Industrial,Mediterranean",1
+"Classic,Farmhouse,Modern,Southwestern",1
+"Farmhouse,Minimalist,Modern",1
+"Classic,Mediterranean,Minimalist,Modern",1
+"Classic,Glam,Mid-Century Modern,Transitional",1
+"Art Deco,Mid-Century Modern,Modern",1
+"Classic,Farmhouse,Glam,Traditional",1
+"Classic,Cottage,Mission,Rustic",1
+"Classic,Cottage,Farmhouse,Industrial,Rustic",1
+"Cottage,Mid-Century Modern,Rustic",1
+"Classic,Coastal,Mid-Century Modern",1
+"Industrial,Mid-Century Modern,Transitional",1
+"Bohemian,Coastal,Industrial,Mediterranean,Rustic,Southwestern",1
+"Farmhouse,Glam,Rustic,Traditional",1
+"Classic,Industrial,Mediterranean,Rustic",1
+"Art Deco,Classic,Cottage,Glam",1
+"Bohemian,Coastal,Farmhouse,Mediterranean",1
+"Coastal,Cottage,Modern",1
+"Industrial,Mediterranean,Transitional",1
+"Coastal,Cottage,Industrial,Mid-Century Modern",1
+"Classic,Farmhouse,Mission,Rustic,Southwestern",1
+"Art Deco,Classic,Designer,Glam,Mid-Century Modern,Modern,Transitional",1
+"Industrial,Mediterranean,Modern,Rustic",1
+"Farmhouse,Industrial,Minimalist",1
+"Basics,Casual,Classic,Cottage,Farmhouse,Mediterranean,Rustic,Southwestern,Traditional,Transitional",1
+"Cottage,Industrial,Rustic,Transitional",1
+"Coastal,Rustic,Transitional",1
+"Art Deco,Classic,Designer,Industrial,Mediterranean,Rustic,Southwestern",1
+"Art Deco,Classic,Glam,Modern",1
+"Cottage,Mid-Century Modern",1
+"Farmhouse,Rustic,Southwestern,Transitional",1
+"Art Deco,Farmhouse",1
+"Classic,Coastal,Industrial,Modern",1
+"Bohemian,Cottage,Mediterranean,Rustic",1
+"Mission,Modern,Southwestern",1
+"Farmhouse,Industrial,Mid-Century Modern",1
+"Classic,Contemporary,Farmhouse,Industrial,Modern,Transitional",1
+"Classic,Farmhouse,Industrial,Modern,Rustic,Southwestern",1
+"Cottage,Rustic,Transitional",1
+"Farmhouse,Industrial,Modern,Southwestern",1
+"Industrial,Mission,Modern,Southwestern",1
+"Mission,Traditional",1
+"Cottage,Farmhouse,Mission,Rustic,Southwestern",1
+"Southwestern,Transitional",1
+"Art Deco,Minimalist,Modern",1
+"Designer,Glam,Transitional",1
+"Bohemian,Coastal,Cottage,Farmhouse,Rustic",1
+"Industrial,Mid-Century Modern,Modern,Transitional",1
+"Farmhouse,Industrial,Southwestern,Transitional",1
+"Art Deco,Classic,Modern",1
+"Classic,Coastal,Transitional",1
+"Cottage,Farmhouse,Mediterranean,Rustic,Southwestern",1
+"Bohemian,Mediterranean,Rustic",1
+"Glam,Industrial,Mediterranean,Rustic,Southwestern",1
+"Bohemian,Classic,Coastal,Glam",1
+"Classic,Designer,Mid-Century Modern,Transitional",1
+"Industrial,Mediterranean,Modern",1
+"Classic,Coastal",1
+"Bohemian,Industrial,Rustic",1
+"Bohemian,Glam,Mediterranean,Rustic",1
+"Mediterranean,Mid-Century Modern",1
+"Classic,Farmhouse,Mediterranean,Transitional",1
+"Bohemian,Industrial,Mediterranean",1
+"Art Deco,Contemporary,Modern",1
+"Bohemian,Mid-Century Modern",1
+"Bohemian,Coastal,Farmhouse,Rustic",1
+"Mediterranean,Modern,Southwestern",1
+"Classic,Farmhouse,Mission,Modern,Rustic,Southwestern",1
+"Coastal,Farmhouse,Southwestern",1
+"Bohemian,Classic,Glam,Rustic",1
+"Classic,Industrial,Mediterranean",1
+"Bohemian,Coastal,Mid-Century Modern",1
+"Mediterranean,Rustic,Traditional",1
+"Mediterranean,Rustic,Southwestern,Transitional",1
+"Coastal,Farmhouse,Mid-Century Modern,Modern",1
+"Bohemian,Industrial,Mediterranean,Southwestern",1
+"Farmhouse,Industrial,Modern,Rustic,Transitional",1
+"Glam,Industrial,Mid-Century Modern",1
+"Mission,Modern,Rustic",1
+"Art Deco,Transitional",1
+"Glam,Mediterranean,Modern",1
+"Bohemian,Mission",1
+"Coastal,Cottage,Farmhouse,Rustic",1
+"Classic,Farmhouse,Industrial,Rustic,Southwestern",1
+"Bohemian,Rustic,Southwestern",1
+"Farmhouse,Industrial,Transitional",1
+"Cottage,Modern,Rustic",1
+"Classic,Farmhouse,Mission,Modern,Southwestern",1
+"Coastal,Cottage,Farmhouse,Transitional",1
+"Farmhouse,Industrial,Mission,Modern",1
+"Classic,Cottage,Industrial,Rustic",1
+"Classic,Mission,Modern,Rustic,Southwestern",1
+"Classic,Minimalist,Modern",1
+"Art Deco,Glam,Industrial",1
+"Farmhouse,Glam,Modern",1
+"Contemporary,Cottage,Farmhouse,Glam,Modern,Rustic,Traditional,Transitional",1
+"Coastal,Modern,Rustic",1
+"Classic,Coastal,Glam,Modern",1
+"Mediterranean,Mission,Southwestern",1
+"Bohemian,Cottage,Glam,Mediterranean,Rustic",1
+"Cottage,Farmhouse,Glam,Rustic,Traditional,Transitional",1
+"Classic,Farmhouse,Glam",1
+"Farmhouse,Industrial,Mediterranean,Southwestern",1
+"Classic,Traditional",1
+"Classic,Farmhouse,Industrial,Mission,Modern,Rustic",1
+"Classic,Farmhouse,Industrial,Mission",1
+"Industrial,Modern,Rustic,Transitional",1
+"Coastal,Cottage,Rustic,Southwestern",1
+"Bohemian,Farmhouse,Mediterranean",1
+"Classic,Industrial,Modern,Rustic",1
+"Glam,Industrial,Modern,Transitional",1
+"Glam,Industrial,Modern",1
