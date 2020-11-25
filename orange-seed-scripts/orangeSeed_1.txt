@@ -1,0 +1,1 @@
+[{"oms_id": "306836849", "dimension_image_gcs_location": "gs://ds-jim/dimension_images/output_images/water_heater/306836849.jpg", "dimensions": {"width": "11.0", "height": "6.0", "depth": "3.0"}, "selected_img_guid": "331eae7c-776a-404e-bdca-4c451c32a210", "selected_img_type": "FRONT", "all_image_guids": ["331eae7c-776a-404e-bdca-4c451c32a210"]}]
