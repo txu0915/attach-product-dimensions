@@ -25,6 +25,10 @@ import time
 from PIL import Image
 from PIL import ImageDraw
 
+def create_dir_if_needed(filepath):
+    dir, _ = os.path.split(filepath)
+    if not os.path.isdir(dir):
+        os.makedirs(dir)
 
 def get_merged_img_df(output_dir, day, spark):
     """
@@ -141,6 +145,32 @@ def dim_to_text(dim, num_decimal_pts):
 
     return "%s\"" % s
 
+## modified version for area rug
+def dim_to_text(dim, num_decimal_pts, convert_to_ft = False, display_both_ft_inches=False):
+    """
+    Convert from a numerical dimension value to a textual representation
+    :param dim: The numerical dimension value
+    :param num_decimal_pts: The maximum number of decimal points to include.
+    :return: The string representation of the dimension value, with " to indicate inches.
+    :display_both_ft_inches: display in the format of 12ft 7inches...
+    """
+    if display_both_ft_inches:
+        inches = int(dim)%12
+        ft = int(dim) // 12
+        # s = str(ft) + "'" + str(inches)
+        return "%s" % ft + "'"+ "%s\"" % inches
+    s = ("%%.%df" % num_decimal_pts) % dim
+    if convert_to_ft:
+        dim /= 12.0
+        s = ("%%.%df" % num_decimal_pts) % dim
+        while "." in s and s.endswith((".", "0")):
+            s = s[:-1]
+        return "%s\'" % s
+
+    while "." in s and s.endswith((".", "0")):
+        s = s[:-1]
+    return "%s\"" % s
+
 
 def add_extra_border(img, border_top, border_left, xs, ys, min_edge_dist=25, border_color=(255, 255, 255)):
     """
@@ -184,7 +214,7 @@ def add_extra_border(img, border_top, border_left, xs, ys, min_edge_dist=25, bor
     return img, border_top, border_left
 
 
-def add_label(img, p1, p2, away_pt, label, font, margin, line_width, border_top, border_left):
+def add_label(img, p1, p2, config, dim_name, away_pt, label, font, margin, line_width, border_top, border_left, area_rugs_specific_requirements):
     """
     Draws a dimension line and value on the image.
     Will add extra border to the image if the shifted dimension line or value will be off the screen.
@@ -244,13 +274,52 @@ def add_label(img, p1, p2, away_pt, label, font, margin, line_width, border_top,
     pil_img = Image.fromarray(img)
     draw = ImageDraw.Draw(pil_img)
 
-    draw.line([p1_disp.x + border_left, p1_disp.y + border_top, p2_disp.x + border_left, p2_disp.y + border_top],
-              fill=(0, 0, 0), width=line_width)
+    ## draw dimension bar ends -- area rug specific requirements
+    ## reuse the computed line end positions...
+    bar_x_end_1 = p1_disp.x + border_left
+    bar_y_end_1 = p1_disp.y + border_top
+    bar_x_end_2 = p2_disp.x + border_left
+    bar_y_end_2 = p2_disp.y + border_top
+
+    delta_x = abs(bar_x_end_1 - bar_x_end_2)
+    delta_y = abs(bar_y_end_1 - bar_y_end_2)
+    mid_x = 0.5 * (bar_x_end_1 + bar_x_end_2)
+    mid_y = 0.5 * (bar_y_end_1 + bar_y_end_2)
+
+    if area_rugs_specific_requirements:
+        #if dim_name == 'height':
+        ## determine whether the bar is horizontal (depth & width) or vertical (height)
+        if delta_x/mid_x < delta_y/mid_y: ## this is vertical case
+            endpoint_horiz_delta = 0.5*config['dims_bar_ends_size_fraction']*delta_y
+            draw.line([bar_x_end_1 - endpoint_horiz_delta, bar_y_end_1, bar_x_end_1 + endpoint_horiz_delta, bar_y_end_1],
+                fill=(0, 0, 0), width=line_width)
+            draw.line([bar_x_end_2 - endpoint_horiz_delta, bar_y_end_2, bar_x_end_2 + endpoint_horiz_delta, bar_y_end_2],
+                fill=(0, 0, 0), width=line_width)
+        else: ## this is horizontal case
+            endpoint_verti_delta = 0.5 * config['dims_bar_ends_size_fraction']*delta_x
+            if dim_name == 'depth':
+                endpoint_verti_delta *= 2.0
+            draw.line([bar_x_end_1, bar_y_end_1 - endpoint_verti_delta, bar_x_end_1, bar_y_end_1 + endpoint_verti_delta],
+                fill=(0, 0, 0), width=line_width)
+            draw.line([bar_x_end_2, bar_y_end_2 - endpoint_verti_delta, bar_x_end_2, bar_y_end_2 + endpoint_verti_delta],
+                fill=(0, 0, 0), width=line_width)
+
+        draw.line([bar_x_end_1, bar_y_end_1, bar_x_end_2, bar_y_end_2],
+                  fill=(0, 0, 0), width=line_width)
+    else:
+        draw.line([bar_x_end_1, bar_y_end_1, bar_x_end_2, bar_y_end_2],
+                  fill=(0, 0, 0), width=line_width)
 
     # draw a white rectangle where the text will be located.
-    draw.rectangle([bx1 + border_left, by1 + border_top, bx2 + border_left, by2 + border_top], fill=(255, 255, 255))
-    draw_text_at_pt(draw, label, (m_disp.x + border_left, m_disp.y + border_top), font)
-
+    if dim_name == 'depth':
+        bar_left_x = min(bar_x_end_1,bar_x_end_2)
+        bar_left_y = 0.5*(bar_y_end_1+bar_y_end_2)
+        depth_text_pos_x = 0.4*(bar_left_x + 0)
+        depth_text_pos_y = bar_left_y + config['dims_bar_ends_size_fraction']*delta_x
+        draw_text_at_pt(draw, label,(depth_text_pos_x, depth_text_pos_y), font, x_align="left")
+    else:
+        draw.rectangle([bx1 + border_left, by1 + border_top, bx2 + border_left, by2 + border_top], fill=(255, 255, 255))
+        draw_text_at_pt(draw, label, (m_disp.x + border_left, m_disp.y + border_top), font)
     return np.array(pil_img), border_top, border_left
 
 
@@ -297,4 +366,4 @@ def draw_text_at_pt(draw, text, pt, font, color=(0, 0, 0), x_align="center", y_a
     elif y_align != "top":
         raise ValueError('y_align should be top, bottom, or center')
 
-    draw.multiline_text((x, y), text, fill=color, font=font, align="center")
+    draw.multiline_text((x, y), text, fill=color, font=font, align=x_align)

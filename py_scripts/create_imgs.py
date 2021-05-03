@@ -8,10 +8,10 @@
 # except ImportError as e:
 #     print("In get_dimensions.py: Skipping model_mart_file_utils import: %s" % str(e))
 
-from model_mart_img_utils import *
+from py_scripts.model_mart_img_utils import *
 
 from utils import *
-from consts import *
+from py_scripts.consts import *
 
 from pyspark.sql import SparkSession
 
@@ -735,7 +735,7 @@ def get_font(font_local_filepath, img, config):
     return ImageFont.truetype(font_local_filepath, int(config['font_size_ratio'] * max(img.shape[:2])))
 
 
-def create_dimension_image_front(img, config):
+def create_dimension_image_front(img, config, area_rugs_specific_requirements= False):
     """
     Get the coordinates of the dimension lines using the front-facing image algorithm,
     which basically just finds the bounding box of the product.
@@ -788,6 +788,10 @@ def create_dimension_image_front(img, config):
     depth_lower_pt = Point(lower_depth_x, lower_depth_y)
     depth_upper_pt = Point(upper_depth_x, upper_depth_y)
 
+    if area_rugs_specific_requirements:
+        depth_lower_pt = Point(min_x_bb + 0.5*config['area_rugs_depth_bar_fraction']*(max_x-min_x), 0.4*min_y+0.6*max_y) ### the right point
+        depth_upper_pt = Point(min_x_bb - 0.5*config['area_rugs_depth_bar_fraction']*(max_x-min_x), 0.4*min_y+0.6*max_y) ### the left point
+
     pts_map = {
         "height": (height_bottom_pt, height_top_pt),
         "width": (width_left_pt, width_right_pt),
@@ -798,7 +802,7 @@ def create_dimension_image_front(img, config):
     return debug_imgs, pts_map
 
 
-def add_labels_at_points(img, pts_map, dimension_map, config, font):
+def add_labels_at_points(img, pts_map, dimension_map, config, font, area_rugs_specific_requirements= False):
     """
     Draws the dimension lines and numbers on the image.
 
@@ -817,11 +821,23 @@ def add_labels_at_points(img, pts_map, dimension_map, config, font):
     border_left = 0
 
     for dim_name in ["height", "width", "depth"]:
-        text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'])
+
+        text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'],display_both_ft_inches= area_rugs_specific_requirements)
+
+        if dim_name == "depth":
+            text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'],convert_to_ft = area_rugs_specific_requirements)
+
+        if area_rugs_specific_requirements:
+            if dim_name == 'height':
+                text = text + " L"
+            elif dim_name == 'width':
+                text = text + " W"
+            else:
+                text = text + '\n thickness'
 
         p1, p2 = pts_map[dim_name]
 
-        img, border_top, border_left = add_label(img, p1, p2, center_pt, text, font, line_margin, line_sz, border_top,border_left)
+        img, border_top, border_left = add_label(img, p1, p2, config, dim_name, center_pt, text, font, line_margin, line_sz, border_top, border_left, area_rugs_specific_requirements)
 
     return img
 
@@ -906,7 +922,7 @@ def should_swap_hd_dims(pts_map, dimension_map, swap_coeff=0.6):
 
 
 def create_dimension_image(img, config, dimension_map, font_local_filepath, is_side_img, product_type,
-                           allow_swap_to_front):
+                           allow_swap_to_front, area_rugs_specific_requirements= False):
     """
     Create the dimension image and the debug images showing how it was formed.
 
@@ -927,10 +943,10 @@ def create_dimension_image(img, config, dimension_map, font_local_filepath, is_s
         debug_imgs, pts_map = create_dimension_image_side(img_w_border, config)
 
         if allow_swap_to_front and is_front_facing_depth_and_height(pts_map):
-            debug_imgs_front, pts_map = create_dimension_image_front(img_w_border, config)
+            debug_imgs_front, pts_map = create_dimension_image_front(img_w_border, config, area_rugs_specific_requirements)
             debug_imgs += debug_imgs_front
     else:
-        debug_imgs, pts_map = create_dimension_image_front(img_w_border, config)
+        debug_imgs, pts_map = create_dimension_image_front(img_w_border, config, area_rugs_specific_requirements)
 
     if (not is_side_img) and product_type in config['allow_swap_height_depth_product_types'] and should_swap_hd_dims(
             pts_map, dimension_map):
@@ -938,7 +954,7 @@ def create_dimension_image(img, config, dimension_map, font_local_filepath, is_s
         pts_map['height'] = pts_map['depth']
         pts_map['depth'] = temp
 
-    dimension_image = add_labels_at_points(img_w_border, pts_map, dimension_map, config, font)
+    dimension_image = add_labels_at_points(img_w_border, pts_map, dimension_map, config, font,area_rugs_specific_requirements)
 
     return dimension_image, debug_imgs
 
@@ -962,116 +978,116 @@ def create_dimension_image(img, config, dimension_map, font_local_filepath, is_s
 #     transfer_local_file_to_storage(local_img_filename, "%s/%s/%s" % (img_save_dir, product_type, img_filename))
 
 
-def create_and_save_all_images(spark, day, config_loc, output_dir, image_type, save_debug_imgs, allow_swap_to_front):
-    logging.info("\n\nloading the drawing config file")
-    drawing_config_local_filepath = "drawing_config.json"
-    transfer_storage_file_to_local(config_loc, drawing_config_local_filepath)
-    with open(drawing_config_local_filepath, 'r') as fp:
-        config = json.load(fp)
-    logging.info("\n\nConfig: %s" % config)
+# def create_and_save_all_images(spark, day, config_loc, output_dir, image_type, save_debug_imgs, allow_swap_to_front):
+#     logging.info("\n\nloading the drawing config file")
+#     drawing_config_local_filepath = "drawing_config.json"
+#     transfer_storage_file_to_local(config_loc, drawing_config_local_filepath)
+#     with open(drawing_config_local_filepath, 'r') as fp:
+#         config = json.load(fp)
+#     logging.info("\n\nConfig: %s" % config)
+#
+#     # product_type, oms_id, image_guid, image_type
+#     logging.info("\n\nloading the merged image data")
+#     merged_img_df = get_merged_img_df(output_dir, day, spark)
+#
+#     # oms_id, width, height, depth
+#     logging.info("\n\nloading the dimension data")
+#     dimension_df = get_dimension_df(output_dir, day, spark, config['num_dim_decimal_pts'])
+#
+#     logging.info("\n\nloading the font file")
+#     font_local_filepath = "font.otf"
+#     transfer_storage_file_to_local(config['font_file_loc'], font_local_filepath)
+#
+#     # product_type, oms_id, image_guid, image_type, width, height, depth
+#     logging.info("\n\ncombining images with dimensions")
+#     front_img_dim_pd_df = get_one_image_type_with_dims(merged_img_df, dimension_df, image_type).toPandas()
+#
+#     logging.info("\n\nAdding dimensions to images")
+#
+#     for product_type in front_img_dim_pd_df.product_type.unique():
+#         logging.info("\n\nGenerating Images for %s" % product_type)
+#
+#         app_rows = front_img_dim_pd_df[front_img_dim_pd_df.product_type == product_type]
+#         print_step_size = int(math.ceil(len(app_rows) / 10))
+#         num_imgs_done = 0
+#
+#         for i in app_rows.index:
+#             if num_imgs_done % print_step_size == 0:
+#                 logging.info("\nGenerating Image %d out of %d at time %s" % (
+#                     num_imgs_done + 1, len(app_rows), str(datetime.datetime.now())))
+#
+#             num_imgs_done += 1
+#             row = app_rows.loc[i]
+#
+#             try:
+#                 img = get_image(row.image_guid)
+#
+#                 dimension_map = {
+#                     "height": row.height,
+#                     "width": row.width,
+#                     "depth": row.depth
+#                 }
+#
+#                 dimension_image, debug_imgs = create_dimension_image(img, config, dimension_map, font_local_filepath,
+#                                                                      row.image_type == "SIDE", row.product_type,
+#                                                                      allow_swap_to_front)
+#
+#                 # save_img_to_storage(dimension_image, row.product_type, "%s.jpg" % row.oms_id,
+#                 #                     "%s/%s/%s" % (output_dir, format_day(day, '-'), IMAGES_OUTPUT_SUFFIX))
+#                 # save_img(img, filename, storage_dir, local_filename=None, local_dir=None, image_sizes=None)
+#                 save_img(dimension_image, "%s.jpg" % row.oms_id,
+#                          "%s/%s/%s/%s" % (output_dir, format_day(day, '-'), IMAGES_OUTPUT_SUFFIX, row.product_type),
+#                          local_filename="temp.jpg")
+#
+#                 if save_debug_imgs:
+#                     for j in range(len(debug_imgs)):
+#                         # save_img_to_storage(debug_imgs[j], row.product_type, "%s_%d.jpg" % (row.oms_id, j),
+#                         #                     "%s/%s/%s" % (output_dir, format_day(day, '-'), DEBUG_IMGS_SUFFIX))
+#                         save_img(debug_imgs[j], "%s_%d.jpg" % (row.oms_id, j),
+#                                  "%s/%s/%s/%s" % (output_dir, format_day(day, '-'), DEBUG_IMGS_SUFFIX, row.product_type),
+#                                  local_filename="temp.jpg")
+#             except Exception as e:
+#                 print("Problem generating image for oms_id %s:" % row.oms_id)
+#                 print(''.join(traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__)))
+#                 continue
 
-    # product_type, oms_id, image_guid, image_type
-    logging.info("\n\nloading the merged image data")
-    merged_img_df = get_merged_img_df(output_dir, day, spark)
 
-    # oms_id, width, height, depth
-    logging.info("\n\nloading the dimension data")
-    dimension_df = get_dimension_df(output_dir, day, spark, config['num_dim_decimal_pts'])
-
-    logging.info("\n\nloading the font file")
-    font_local_filepath = "font.otf"
-    transfer_storage_file_to_local(config['font_file_loc'], font_local_filepath)
-
-    # product_type, oms_id, image_guid, image_type, width, height, depth
-    logging.info("\n\ncombining images with dimensions")
-    front_img_dim_pd_df = get_one_image_type_with_dims(merged_img_df, dimension_df, image_type).toPandas()
-
-    logging.info("\n\nAdding dimensions to images")
-
-    for product_type in front_img_dim_pd_df.product_type.unique():
-        logging.info("\n\nGenerating Images for %s" % product_type)
-
-        app_rows = front_img_dim_pd_df[front_img_dim_pd_df.product_type == product_type]
-        print_step_size = int(math.ceil(len(app_rows) / 10))
-        num_imgs_done = 0
-
-        for i in app_rows.index:
-            if num_imgs_done % print_step_size == 0:
-                logging.info("\nGenerating Image %d out of %d at time %s" % (
-                    num_imgs_done + 1, len(app_rows), str(datetime.datetime.now())))
-
-            num_imgs_done += 1
-            row = app_rows.loc[i]
-
-            try:
-                img = get_image(row.image_guid)
-
-                dimension_map = {
-                    "height": row.height,
-                    "width": row.width,
-                    "depth": row.depth
-                }
-
-                dimension_image, debug_imgs = create_dimension_image(img, config, dimension_map, font_local_filepath,
-                                                                     row.image_type == "SIDE", row.product_type,
-                                                                     allow_swap_to_front)
-
-                # save_img_to_storage(dimension_image, row.product_type, "%s.jpg" % row.oms_id,
-                #                     "%s/%s/%s" % (output_dir, format_day(day, '-'), IMAGES_OUTPUT_SUFFIX))
-                # save_img(img, filename, storage_dir, local_filename=None, local_dir=None, image_sizes=None)
-                save_img(dimension_image, "%s.jpg" % row.oms_id,
-                         "%s/%s/%s/%s" % (output_dir, format_day(day, '-'), IMAGES_OUTPUT_SUFFIX, row.product_type),
-                         local_filename="temp.jpg")
-
-                if save_debug_imgs:
-                    for j in range(len(debug_imgs)):
-                        # save_img_to_storage(debug_imgs[j], row.product_type, "%s_%d.jpg" % (row.oms_id, j),
-                        #                     "%s/%s/%s" % (output_dir, format_day(day, '-'), DEBUG_IMGS_SUFFIX))
-                        save_img(debug_imgs[j], "%s_%d.jpg" % (row.oms_id, j),
-                                 "%s/%s/%s/%s" % (output_dir, format_day(day, '-'), DEBUG_IMGS_SUFFIX, row.product_type),
-                                 local_filename="temp.jpg")
-            except Exception as e:
-                print("Problem generating image for oms_id %s:" % row.oms_id)
-                print(''.join(traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__)))
-                continue
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("--date", required=False,
-                        help="The date to generate images for in format YYYY-MM-DD, defaults to the most recent day",
-                        default=None, dest="date")
-    parser.add_argument("--config_loc", required=False,
-                        help="The config file, default\"gs://hd-datascience-np-artifacts/jim/dimension_images/config/image_drawing_config.json\"",
-                        default="gs://hd-datascience-np-artifacts/jim/dimension_images/config/image_drawing_config.json",
-                        dest="config_loc")
-    parser.add_argument("--output_dir", required=False,
-                        help="file where the output will be written, default \"gs://hd-datascience-np-data/dimension_images\"",
-                        default="gs://hd-datascience-np-data/dimension_images", dest="output_dir")
-    parser.add_argument("--image_type", required=False,
-                        help='The type of images to generate (should be either "FRONT" or "SIDE"), default is both',
-                        default=None, dest="image_type")
-    parser.add_argument("--save_debug_imgs", required=False, help='Include this flag to save debug images',
-                        action="store_true", dest="save_debug_imgs")
-    parser.add_argument("--allow_swap_to_front", required=False,
-                        help='If this flag is included, the system will examine the results for side-facing images. If it looks like the depth and height are parallel and the same length, will regenerate as a front-facing image.',
-                        action="store_true", dest="allow_swap_to_front")
-
-    args = parser.parse_args()
-
-    if args.date is None:
-        day = get_most_recent_date(args.output_dir)
-    else:
-        day = parse_date(args.date, divider='-')
-    logging.info("\n\nGetting dimensions for day %s" % day)
-
-    spark = SparkSession.builder \
-        .appName("Dimension Images (Front-Facing Images)") \
-        .config("spark.sql.shuffle.partitions", "50") \
-        .getOrCreate()
-
-    create_and_save_all_images(spark, day, args.config_loc, args.output_dir, args.image_type, args.save_debug_imgs,
-                               args.allow_swap_to_front)
-
-    spark.stop()
+# if __name__ == '__main__':
+#     parser = argparse.ArgumentParser()
+#
+#     parser.add_argument("--date", required=False,
+#                         help="The date to generate images for in format YYYY-MM-DD, defaults to the most recent day",
+#                         default=None, dest="date")
+#     parser.add_argument("--config_loc", required=False,
+#                         help="The config file, default\"gs://hd-datascience-np-artifacts/jim/dimension_images/config/image_drawing_config.json\"",
+#                         default="gs://hd-datascience-np-artifacts/jim/dimension_images/config/image_drawing_config.json",
+#                         dest="config_loc")
+#     parser.add_argument("--output_dir", required=False,
+#                         help="file where the output will be written, default \"gs://hd-datascience-np-data/dimension_images\"",
+#                         default="gs://hd-datascience-np-data/dimension_images", dest="output_dir")
+#     parser.add_argument("--image_type", required=False,
+#                         help='The type of images to generate (should be either "FRONT" or "SIDE"), default is both',
+#                         default=None, dest="image_type")
+#     parser.add_argument("--save_debug_imgs", required=False, help='Include this flag to save debug images',
+#                         action="store_true", dest="save_debug_imgs")
+#     parser.add_argument("--allow_swap_to_front", required=False,
+#                         help='If this flag is included, the system will examine the results for side-facing images. If it looks like the depth and height are parallel and the same length, will regenerate as a front-facing image.',
+#                         action="store_true", dest="allow_swap_to_front")
+#
+#     args = parser.parse_args()
+#
+#     if args.date is None:
+#         day = get_most_recent_date(args.output_dir)
+#     else:
+#         day = parse_date(args.date, divider='-')
+#     logging.info("\n\nGetting dimensions for day %s" % day)
+#
+#     spark = SparkSession.builder \
+#         .appName("Dimension Images (Front-Facing Images)") \
+#         .config("spark.sql.shuffle.partitions", "50") \
+#         .getOrCreate()
+#
+#     create_and_save_all_images(spark, day, args.config_loc, args.output_dir, args.image_type, args.save_debug_imgs,
+#                                args.allow_swap_to_front)
+#
+#     spark.stop()
