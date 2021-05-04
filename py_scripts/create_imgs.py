@@ -825,7 +825,7 @@ def add_labels_at_points(img, pts_map, dimension_map, config, font, area_rugs_sp
         text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'],display_both_ft_inches= area_rugs_specific_requirements)
 
         if dim_name == "depth":
-            text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'],convert_to_ft = area_rugs_specific_requirements)
+            text = dim_to_text(dimension_map[dim_name], config['num_dim_decimal_pts'])
 
         if area_rugs_specific_requirements:
             if dim_name == 'height':

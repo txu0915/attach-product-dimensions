@@ -146,7 +146,7 @@ def dim_to_text(dim, num_decimal_pts):
     return "%s\"" % s
 
 ## modified version for area rug
-def dim_to_text(dim, num_decimal_pts, convert_to_ft = False, display_both_ft_inches=False):
+def dim_to_text(dim, num_decimal_pts, display_both_ft_inches=False):
     """
     Convert from a numerical dimension value to a textual representation
     :param dim: The numerical dimension value
@@ -160,12 +160,6 @@ def dim_to_text(dim, num_decimal_pts, convert_to_ft = False, display_both_ft_inc
         # s = str(ft) + "'" + str(inches)
         return "%s" % ft + "'"+ "%s\"" % inches
     s = ("%%.%df" % num_decimal_pts) % dim
-    if convert_to_ft:
-        dim /= 12.0
-        s = ("%%.%df" % num_decimal_pts) % dim
-        while "." in s and s.endswith((".", "0")):
-            s = s[:-1]
-        return "%s\'" % s
 
     while "." in s and s.endswith((".", "0")):
         s = s[:-1]
