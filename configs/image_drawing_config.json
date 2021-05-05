@@ -1,0 +1,25 @@
+{
+    "num_dim_decimal_pts": 2,
+
+    "border_ratio": 0.15,
+    
+    "line_margin_ratio": 0.05,
+    "line_size_ratio": 0.005,
+    
+    "font_file_loc": "gs://hd-datascience-np-artifacts/jim/dimension_images/config/HelveticaNeue-Medium.otf",
+    "font_size_ratio": 0.04,
+    "area_rugs_depth_bar_fraction": 0.2,
+    "dims_bar_ends_size_fraction": 0.1,
+
+    "front": {
+        "depth_angle_deg": 135, 
+        "start_depth_height_ratio": 0.3,
+        "end_depth_height_ratio": 0.1
+    },
+
+    "allow_swap_height_depth_product_types": [
+        "Electric_Cooktop",
+        "Gas_Cooktop",
+        "Induction_Cooktop"
+    ]
+}
